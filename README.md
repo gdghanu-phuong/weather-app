@@ -2,5 +2,5 @@
 
 Weather Forecasting Website using API
 
-Run Intruction: npm run dev
-Library use: Tanstack Query
+* Run Intruction: npm run dev
+* Use: Tanstack Query, Tailwind CSS
