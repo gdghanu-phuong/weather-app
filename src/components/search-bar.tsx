@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CityValue } from "../type/city.type";
 
-export default function SearchBar({ name, setName }: CityValue) {
+export default function SearchBar({ setName }: CityValue) {
   const [inputValue, setInputValue] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
