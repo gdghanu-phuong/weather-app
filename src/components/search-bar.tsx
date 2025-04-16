@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { CityValue } from "../type/city.type";
 
-export default function SearchBar({ setName }: CityValue) {
-  const [inputValue, setInputValue] = useState("");
+export default function SearchBar({ setName }: {setName: (value:string) => void}) {
+  const [input, setInput] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setName(inputValue);
-    setInputValue("");
+    setName(input);
+    setInput("");
   };
 
   return (
@@ -14,15 +13,15 @@ export default function SearchBar({ setName }: CityValue) {
       <form onSubmit={handleSubmit}>
         <input
           className="outline-hidden"
-          type="text"
+          type="search"
           placeholder="Enter city or region"
           id="city"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
           required
         />
         <button className="bg-black text-white" type="submit">
-          <i className="fa-solid fa-magnifying-glass p-4"></i>
+          <i className="fa-solid fa-magnifying-glass p-4" />
         </button>
       </form>
     </div>

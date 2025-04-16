@@ -1,4 +1,5 @@
 import { API_CONFIG } from "../constant/api"
+import type { WeatherDataType } from "../type/weather.type";
 
 const getWeather = async(cityName: string) => {
     try{
@@ -7,7 +8,7 @@ const getWeather = async(cityName: string) => {
             throw new Error(`${response.status}`);
         }
         const data = await response.json();
-        return data;
+        return {weatherData: data} as WeatherDataType;
     }catch(error){
         console.log(error);
     }

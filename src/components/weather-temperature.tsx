@@ -1,9 +1,8 @@
-import { WeatherDataType } from '../type/weather.type';
-
+import type { WeatherDataType } from '../type/weather.type';
+import { convertTemp } from '../utils/convert-temp';
 
 export default function WeatherTemperature({weatherData}:WeatherDataType) {
-  if (!weatherData) return <p>Loading...</p>
-  const temp = parseFloat((weatherData.main.temp - 273.15).toFixed());
+  const temp = convertTemp(weatherData.main.temp);
   return (
     <div className='w-xs columns-2'>
       <h1 className='text-3xl font-semibold'>

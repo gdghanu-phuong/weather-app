@@ -1,4 +1,4 @@
-import { WeatherType } from "./weather.type";
+import type { WeatherType } from "./weather.type";
 
 interface ForecastResponse {
     dt: number;

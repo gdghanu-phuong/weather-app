@@ -1,8 +1,6 @@
-import { WeatherDataType } from '../type/weather.type';
+import type { WeatherDataType } from '../type/weather.type';
 
 export default function WeatherData({weatherData}:WeatherDataType) {
-  if (!weatherData) return <p>Loading...</p>
-  console.log(weatherData);
   const WEATHER_DATA = [
     {label: "Wind Speed", value: `${weatherData.wind.speed} M/C`},
     {label: "Wind Gusts", value: `${weatherData.wind.gust} M/C` || "No value found"},
@@ -14,7 +12,7 @@ export default function WeatherData({weatherData}:WeatherDataType) {
   return (
     <div className='columns-2 mt-10'>
         {WEATHER_DATA.map(({label, value}) =>
-        <div className='pt-3 columns-2 border-b border-gray-400'>
+        <div className='pt-3 columns-2 border-b border-gray-400' key="">
           <div>{label}</div>
           <div className='font-semibold'>{value}</div>
         </div>

@@ -1,8 +1,7 @@
-import { WeatherDataType } from '../type/weather.type';
 import { calculateLocalTime } from '../utils/calculate-local-time';
 
-export default function LocalTimezone({ weatherData }: WeatherDataType)  {
-const localTime = calculateLocalTime(weatherData.timezone);
+export default function LocalTimezone({ timezone }: {timezone:number})  {
+const localTime = calculateLocalTime(timezone);
   return (
     <div className='my-auto'>
       Local Time: {`

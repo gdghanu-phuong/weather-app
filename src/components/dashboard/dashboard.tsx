@@ -6,32 +6,29 @@ import WeatherTemperature from '../weather-temperature'
 import WeatherData from '../weather-data'
 import Forecast from '../forecast'
 import { useGetWeather } from '../../hooks/use-weather'
-import { useError } from '../../hooks/use-error'
 import { useGetForecast } from '../../hooks/use-forecast'
+import { CITY_NAME } from '../../constant'
 
 export default function Dashboard() {
-  const cityName = "Hanoi";
-  const [name, setName] = useState(cityName);
-  const { weatherData, error } = useGetWeather(name);
-  const { weatherData: defaultData } = useGetWeather(cityName);
-  const errorMsg = useError(error, "City not found");
-  const usedData = error ? defaultData : weatherData;
-  const { forecastData } = useGetForecast(usedData?.name || cityName);
+  const [name, setName] = useState(CITY_NAME);
+  const { data: weatherData, error, isPending } = useGetWeather(name);
+  const { forecastData} = useGetForecast(name);
+  if (isPending) return <p>Loading...</p>
   return (
     <div className='columns-1 w-full justify-center mx-auto my-3 px-20'>
       <div className='flex'>
-        <SearchBar name={name} setName={setName} />
-        {usedData && <LocalTimezone weatherData={usedData} />}
+        <SearchBar setName={setName} />
+        {weatherData && <LocalTimezone timezone={weatherData.weatherData?.timezone} />}
       </div>
-      {errorMsg && <p className="text-red-600 mt-2">{errorMsg}</p>}
-      {usedData && (
+      {error && <p className="text-red-600 mt-2">{error.message}</p>}
+      {weatherData?.weatherData && (
         <>
-          <Location weatherData={usedData}/>
-          <WeatherTemperature weatherData={usedData} />
-          <WeatherData weatherData={usedData} />
+          <Location timezone={weatherData.weatherData.timezone} name={weatherData.weatherData.name}/>
+          <WeatherTemperature weatherData={weatherData.weatherData} />
+          <WeatherData weatherData={weatherData.weatherData} />
         </>
       )}
-      <Forecast forecastData={forecastData} />
+    {forecastData && <Forecast forecastData={forecastData?.forecastData}/>}
     </div>
   );
 }
